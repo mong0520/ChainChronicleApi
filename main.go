@@ -2,9 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/mong0520/ChainChronicleApi/char"
-	"github.com/mong0520/ChainChronicleApi/quest"
-	"github.com/mong0520/ChainChronicleApi/session"
+	"github.com/mong0520/ChainChronicleApi/handlers"
 	log "github.com/sirupsen/logrus"
 	"gopkg.in/mgo.v2"
 )
@@ -12,7 +10,9 @@ import (
 // APIMiddleware will add the db connection to the context
 func APIMiddleware(db *mgo.Session) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		logger := log.New()
 		c.Set("databaseConn", db)
+		c.Set("logger", logger)
 		c.Next()
 	}
 }
@@ -28,11 +28,11 @@ func main() {
 
 	router.Use(APIMiddleware(conn))
 
-	router.GET("/login", session.LoginHandler)
-	router.GET("/status", session.StatusHandler)
-	router.GET("/quest", quest.QuestQueryHandler)
-	router.GET("/playquest", quest.QuestPlayHandler)
-	router.GET("/char", char.CharQueryHandler)
+	router.GET("/login", handlers.LoginHandler)
+	router.GET("/status", handlers.StatusHandler)
+	router.GET("/query_quest", handlers.QuestQueryHandler)
+	router.GET("/play_quest", handlers.QuestPlayHandler)
+	router.GET("/char", handlers.CharQueryHandler)
 
-	router.Run(":8000")
+	router.Run(":5000")
 }

@@ -59,6 +59,8 @@ github.com/mong0520/ChainChronicleGo v0.0.0-20190924034658-712a3a6769ea h1:P6H8y
 github.com/mong0520/ChainChronicleGo v0.0.0-20190924034658-712a3a6769ea/go.mod h1:HcqtW7SqK4HpUCL1AePGDNGB6BQACLBzNg8iwfx4bj4=
 github.com/mong0520/ChainChronicleGo v0.0.0-20190924043102-ba6187c681b3 h1:6/u4RNdJSnR/XrOtTFHfFrQtMI8X5JNxjL10lsVYbC8=
 github.com/mong0520/ChainChronicleGo v0.0.0-20190924043102-ba6187c681b3/go.mod h1:HcqtW7SqK4HpUCL1AePGDNGB6BQACLBzNg8iwfx4bj4=
+github.com/mong0520/ChainChronicleGo v0.0.0-20190924081325-aa0b509cec46 h1:1Fef+0ptWeAXqN9XKva33IYWBdhv1bnS2OgqGxIOAo0=
+github.com/mong0520/ChainChronicleGo v0.0.0-20190924081325-aa0b509cec46/go.mod h1:HcqtW7SqK4HpUCL1AePGDNGB6BQACLBzNg8iwfx4bj4=
 github.com/oleiade/reflections v1.0.0 h1:0ir4pc6v8/PJ0yw5AEtMddfXpWBXg9cnG7SgSoJuCgY=
 github.com/oleiade/reflections v1.0.0/go.mod h1:RbATFBbKYkVdqmSFtx13Bb/tVhR0lgOBXunWTZKeL4w=
 github.com/op/go-logging v0.0.0-20160315200505-970db520ece7 h1:lDH9UUVJtmYCjyT0CI4q8xvlXPxeZ0gYCVvWbmPlp88=
@@ -105,11 +107,14 @@ golang.org/x/sys v0.0.0-20190422165155-953cdadca894/go.mod h1:h1NjWce9XRLGQEsW7w
 golang.org/x/sys v0.0.0-20190813064441-fde4db37ae7a/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/sys v0.0.0-20190922100055-0a153f010e69 h1:rOhMmluY6kLMhdnrivzec6lLgaVbMHMn2ISQXJeJ5EM=
 golang.org/x/sys v0.0.0-20190922100055-0a153f010e69/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
+golang.org/x/sys v0.0.0-20190924062700-2aa67d56cdd7 h1:9Vs0Vm0p/0tnWLBWn79aav6fpcxKjBZbd21Lhxzit4k=
+golang.org/x/sys v0.0.0-20190924062700-2aa67d56cdd7/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/text v0.3.0/go.mod h1:NqM8EUOU14njkJ3fqMW+pc6Ldnwhi/IjpwHt7yyuwOQ=
 golang.org/x/text v0.3.2/go.mod h1:bEr9sfX3Q8Zfm5fL9x+3itogRgK3+ptLWKqgva+5dAk=
 golang.org/x/tools v0.0.0-20180917221912-90fa682c2a6e/go.mod h1:n7NCudcB/nEzxVGmLbDWY5pfWTLqBcC2KZ6jyYvM4mQ=
 golang.org/x/tools v0.0.0-20190923230126-0f9bb8f614ff/go.mod h1:b+2E5dAYhXwXZwtnZ6UAqBI28+e2cm9otk0dWdXHAEo=
 golang.org/x/tools v0.0.0-20190924021748-035fdb12d3f0/go.mod h1:b+2E5dAYhXwXZwtnZ6UAqBI28+e2cm9otk0dWdXHAEo=
+golang.org/x/tools v0.0.0-20190924052046-3ac2a5bbd98a/go.mod h1:b+2E5dAYhXwXZwtnZ6UAqBI28+e2cm9otk0dWdXHAEo=
 golang.org/x/xerrors v0.0.0-20190717185122-a985d3407aa7/go.mod h1:I/5z698sn9Ka8TeJc9MKroUUfqBBauWjQqLJ2OPfmY0=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
 gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 h1:qIbj1fsPNlZgppZ+VLlY7N33q108Sa+fhmuc+sWQYwY=
