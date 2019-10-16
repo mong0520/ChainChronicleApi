@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/mong0520/ChainChronicleApi/handlers"
 	log "github.com/sirupsen/logrus"
@@ -18,8 +19,15 @@ func APIMiddleware(db *mgo.Session) gin.HandlerFunc {
 }
 
 func main() {
-
 	router := gin.New()
+	// router.Use(cors.New(cors.Config{
+	// 	AllowOriginFunc:  func(origin string) bool { return true },
+	// 	AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "PATCH"},
+	// 	AllowHeaders:     []string{"Origin", "Content-Length", "Content-Type"},
+	// 	AllowCredentials: true,
+	// 	MaxAge:           12 * time.Hour,
+	// }))
+	router.Use(cors.Default())
 	conn := &mgo.Session{}
 	conn, err := mgo.Dial("localhost:27017")
 	if err != nil {
