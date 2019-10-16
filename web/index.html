@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>鎖鏈戰記後台管理系統</title>
+    </head>
+    <body>
+        <h1>鎖鏈戰記後台管理系統</h1>
+        <hr>
+        <script src="https://cdn.staticfile.org/vue/2.4.2/vue.js"></script>
+        <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+
+        <div id="appBtn" clas=content>
+            請輸入 UID: <input type="text" id="uid" value="iOS7069F115-D7DC-48F3-8658-04191F4AA949">
+            <button type="button" @click="login" class=test>登入</button>
+            <button type="button" @click="status">狀態查詢</button>
+            <button type="button" disabled="disabled" @click="status">抽張卡</button>
+            <button type="button" disabled="disabled" @click="status">玩關卡</button>
+            <button type="button" disabled="disabled" @click="status">關卡查詢</button>
+            <button type="button" disabled="disabled" @click="status">卡牌查詢</button>
+            <p hidden id="sid">{{sid}}</p>
+            <pre><code>{{msg}}</code></pre>
+        </div>
+        
+
+        <script>
+            new Vue({
+                el: '#appBtn',
+                data: {
+                    sid: '',
+                    msg: '',
+                },
+                methods: {
+                    login() {
+                        {                            
+                            var uid = document.getElementById("uid").value
+                            console.log("uid = " + uid);
+                            axios
+                            .get('http://nt1.me:5000/login', {params: {uid: uid}})
+                            .then(response => {
+                                this.sid = response.data.data;
+                                this.msg = "登入成功!";
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                            });
+                        }
+                    },
+                    status() {
+                        {
+                            var sid = document.getElementById("sid").textContent
+                            console.log(sid);
+                            axios
+                                .get('http://nt1.me:5000/status', {params:{sid: sid}})
+                                .then(response => {     
+                                    var data = JSON.stringify(response.data.data, null, 4)
+                                    console.log(data);
+                                    this.msg = data;
+                                })
+                                .catch(function (error) {
+                                    console.log(error);
+                                });
+                        }
+                    },
+                    prompt() {
+                        var sid = document.getElementById("sid").textContent;
+                        this.msg = sid;
+                        console.log(sid);
+                    },
+                    prompt2() {
+                        this.msg = '快來看這裡！我是新訊息2！';
+                    }
+                }
+                });
+        </script>
+
+    </body>
+</html>

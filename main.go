@@ -36,6 +36,7 @@ func main() {
 
 	router.Use(APIMiddleware(conn))
 
+	router.Static("/web", "./web")
 	router.GET("/login", handlers.LoginHandler)
 	router.GET("/status", handlers.StatusHandler)
 	router.GET("/query_quest", handlers.QuestQueryHandler)
