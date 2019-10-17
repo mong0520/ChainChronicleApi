@@ -1,80 +1,95 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
-        <title>鎖鏈戰記後台管理系統</title>
-        <link rel="stylesheet" href="https://unpkg.com/vue-easytable/umd/css/index.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation.min.css">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdn.staticfile.org/foundation/5.5.3/css/foundation.min.css">
+        <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://cdn.staticfile.org/foundation/5.5.3/js/foundation.min.js"></script>
+        <script src="https://cdn.staticfile.org/foundation/5.5.3/js/vendor/modernizr.js"></script>
     </head>
     <body>        
         <h1>鎖鏈戰記後台管理系統</h1>
-        <hr>
-        <script src="https://unpkg.com/vue/dist/vue.js"></script>
-        <script src="https://unpkg.com/vue-easytable/umd/js/index.js"></script>
-        <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
-        <script src="vueApp.js"></script>
-
         <div id="app" clas=content>
             <div class="large-10 medium-7 columns">
-                <label>請輸入 UID:
-                    <input type="text" id="uid" value="iOS7069F115-D7DC-48F3-8658-04191F4AA949">
-                </label>                
-                <button type="button" @click="login" class=test>登入</button>
-                <button type="button" @click="status">查狀態</button>
-                <p id="sid">{{sid}}</p>
-                <pre><code>{{msg}}</code></pre>
+                <input type="text" id="uid" value="iOS7069F115-D7DC-48F3-8658-04191F4AA949">
+                <button type="button" @click="login" class="button" data-reveal-id="myModal">登入</button>
+                <button type="button" @click="status" class="button" data-reveal-id="myModal">查狀態</button>                
+                <p id="sid" hidden>{{sid}}</p>
+                <div id="myModal" class="reveal-modal xlarge" data-reveal>
+                    <pre><code>{{msg}}</code></pre>
+                    <a class="close-reveal-modal">&times;</a>
+                </div>                
             </div>
             
             <hr>
 
-            <div class="large-10 medium-7 columns">
-                <input type="text" id="queryText" value="" placeholder="查點東西">
-                <button type="button" disabled="disabled" @click="status">抽張卡</button>
-                <button type="button" disabled="disabled" @click="status">玩關卡</button>
-                <button type="button" @click="queryQuest">查關卡</button>
-                <button type="button" @click="queryChar">查卡牌</button>
+            <div class="large-10 medium-7 columns">     
+                <div id="questModel" class="reveal-modal xlarge" data-reveal>
+                    <!-- table for quest -->
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>QuestType</th>
+                                <th>QuestID</th>
+                                <th>QuestName</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="result in resultQuest">
+                                <td>{{ result.QuestType }}</td>
+                                <td>{{ result.QuestID }}</td>
+                                <td>{{ result.Name }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a class="close-reveal-modal">&times;</a>
+                </div>
+
+                <div id="charModel" class="reveal-modal xlarge" data-reveal>
+                    <!-- table for char -->
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>稀有度</th>
+                                <th>名字</th>
+                                <th>Profile</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="result in resultChar">
+                                <td>{{ result.cid }}</td>
+                                <td>{{ result.rarity }}</td>
+                                <td>{{ result.title }} - {{ result.name }}</td>
+                                <td>{{ result.profile }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a class="close-reveal-modal">&times;</a>
+                </div>
+                <input type="text" id="queryText" value="" placeholder="查點東西">                
+                <button type="button" @click="queryQuest" class="button" data-reveal-id="questModel">查關卡</button>                
+                <button type="button" @click="queryChar" class="button" data-reveal-id="charModel">查卡牌</button>
+                <p></p>
+                <button type="button" disabled="disabled" @click="status" class="button">抽張卡</button>
+                <button type="button" disabled="disabled" @click="status" class="button">玩關卡</button>
+                
             </div>
 
-            <!-- table for quest -->
-            <table>
-                <thead>
-                    <tr>
-                        <th>QuestType</th>
-                        <th>QuestID</th>
-                        <th>QuestName</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="result in resultQuest">
-                        <td>{{ result.QuestType }}</td>
-                        <td>{{ result.QuestID }}</td>
-                        <td>{{ result.Name }}</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <!-- table for char -->
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>稀有度</th>
-                        <th>名字</th>
-                        <th>Profile</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="result in resultChar">
-                        <td>{{ result.cid }}</td>
-                        <td>{{ result.rarity }}</td>
-                        <td>{{ result.title }} - {{ result.name }}</td>
-                        <td>{{ result.profile }}</td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
 
-       
-        <script src="app.js"></script>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-easytable/umd/js/index.js"></script>
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/foundation/5.5.3/js/foundation.min.js"></script>
+    <script src="https://cdn.staticfile.org/foundation/5.5.3/js/vendor/modernizr.js"></script>
+    <script src="app.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(document).foundation();
+        })
+    </script>
     </body>
 </html>

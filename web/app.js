@@ -27,6 +27,7 @@ new Vue({
         },
         status() {
             {
+                this.msg = "查詢中...";
                 var sid = document.getElementById("sid").textContent
                 console.log("sid = " + sid);
                 axios
