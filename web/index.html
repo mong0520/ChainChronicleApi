@@ -15,21 +15,27 @@
         <script src="vueApp.js"></script>
 
         <div id="app" clas=content>
-            請輸入 UID: <input type="text" id="uid" value="iOS7069F115-D7DC-48F3-8658-04191F4AA949">
-            <button type="button" @click="login" class=test>登入</button>
-            <button type="button" @click="status">查狀態</button>
-            <p  id="sid">{{sid}}</p>
+            <div class="large-10 medium-7 columns">
+                <label>請輸入 UID:
+                    <input type="text" id="uid" value="iOS7069F115-D7DC-48F3-8658-04191F4AA949">
+                </label>                
+                <button type="button" @click="login" class=test>登入</button>
+                <button type="button" @click="status">查狀態</button>
+                <p id="sid">{{sid}}</p>
+                <pre><code>{{msg}}</code></pre>
+            </div>
+            
             <hr>
 
-            輸入框 <input type="text" id="queryText" value="to be defined">
-            
-            <button type="button" disabled="disabled" @click="status">抽張卡</button>
-            <button type="button" disabled="disabled" @click="status">玩關卡</button>
-            <button type="button" @click="queryQuest">查關卡</button>
-            <button type="button" disabled="disabled" @click="status">查卡牌</button>
-            
-            <pre><code>{{msg}}</code></pre>
+            <div class="large-10 medium-7 columns">
+                <input type="text" id="queryText" value="" placeholder="查點東西">
+                <button type="button" disabled="disabled" @click="status">抽張卡</button>
+                <button type="button" disabled="disabled" @click="status">玩關卡</button>
+                <button type="button" @click="queryQuest">查關卡</button>
+                <button type="button" @click="queryChar">查卡牌</button>
+            </div>
 
+            <!-- table for quest -->
             <table>
                 <thead>
                     <tr>
@@ -39,10 +45,30 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="result in results">
+                    <tr v-for="result in resultQuest">
                         <td>{{ result.QuestType }}</td>
                         <td>{{ result.QuestID }}</td>
                         <td>{{ result.Name }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- table for char -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>稀有度</th>
+                        <th>名字</th>
+                        <th>Profile</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="result in resultChar">
+                        <td>{{ result.cid }}</td>
+                        <td>{{ result.rarity }}</td>
+                        <td>{{ result.title }} - {{ result.name }}</td>
+                        <td>{{ result.profile }}</td>
                     </tr>
                 </tbody>
             </table>

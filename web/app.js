@@ -5,7 +5,8 @@ new Vue({
     data: {
         sid: '',
         msg: '',
-        results: [],
+        resultQuest: [],
+        resultChar: [],
     },
     methods: {
         login() {
@@ -47,7 +48,17 @@ new Vue({
             axios.get("http://nt1.me:5000/query_quest", { params: { name: questName}})
                 .then(response => { 
                     console.log(response.data.data)
-                    this.results = response.data.data;
+                    this.resultQuest = response.data.data;
+                })
+        },
+        queryChar() {
+            console.log("enter queryChar()")
+            var char = document.getElementById("queryText").value;
+            console.log("Quest name to query = " + char)
+            axios.get("http://nt1.me:5000/char", { params: { name: char } })
+                .then(response => {
+                    console.log(response.data.data)
+                    this.resultChar = response.data.data;
                 })
         },
         prompt() {
