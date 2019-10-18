@@ -30,16 +30,18 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>QuestType</th>
-                                <th>QuestID</th>
-                                <th>QuestName</th>
+                                <th>類型</th>
+                                <th>編號</th>
+                                <th>名稱</th>
+                                <th>動作</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="result in resultQuest">
+                            <tr v-for="(result, index) in resultQuest">
                                 <td>{{ result.QuestType }}</td>
                                 <td>{{ result.QuestID }}</td>
                                 <td>{{ result.Name }}</td>
+                                <td><button id=questInfo type="button" @click="playQuest(result.QuestType, result.QuestID)" class="button tiny" >Play!</button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -68,7 +70,7 @@
                     </table>
                     <a class="close-reveal-modal">&times;</a>
                 </div>
-                <input type="text" id="queryText" value="" placeholder="查點東西">                
+                <input type="text" id="queryText" value="南瓜" placeholder="查點東西">                
                 <button type="button" @click="queryQuest" class="button" data-reveal-id="questModel">查關卡</button>                
                 <button type="button" @click="queryChar" class="button" data-reveal-id="charModel">查卡牌</button>
                 <p></p>

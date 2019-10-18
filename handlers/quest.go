@@ -89,6 +89,7 @@ func QuestPlayHandler(c *gin.Context) {
 		} else {
 			res.Status = http.StatusOK
 			res.Data = resp
+			res.Message = "關卡完成"
 			c.JSON(200, res)
 		}
 	}

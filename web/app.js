@@ -52,6 +52,23 @@ new Vue({
                     this.resultQuest = response.data.data;
                 })
         },
+        playQuest(qtype, qid) {
+            console.log("enter playQuest(), questID = " + qid);
+            var sid = document.getElementById("sid").textContent
+            axios.get("http://nt1.me:5000/play_quest", { params: {
+                sid: sid,
+                qtype: qtype,
+                qid: qid,
+                pt: 0
+            } })
+                .then(response => {
+                    console.log(response.data.message)
+                    window.alert(response.data.message);
+                }).catch(function (error) {
+                    window.alert(response.data.message);
+                    console.log(error);
+                });
+        },
         queryChar() {
             console.log("enter queryChar()")
             var char = document.getElementById("queryText").value;
