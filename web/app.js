@@ -131,7 +131,7 @@ new Vue({
             console.log(sid, gachaID, gachaCount);
             var tempResult = [];
             // for (index = 0; index < gachaBatch; index++) {                
-            axios.get("http://localhost:5000/gacha", {
+            axios.get("http://nt1.me:5000/gacha", {
                 params: {
                     sid: sid,
                     gacha_id: gachaID,
