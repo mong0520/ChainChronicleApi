@@ -7,6 +7,7 @@ new Vue({
         msg: '',
         resultQuest: [],
         resultChar: [],
+        resultUzu: [],
     },
     methods: {
         login() {
@@ -85,6 +86,38 @@ new Vue({
                     console.log(response.data.data)
                     this.resultChar = response.data.data;
                 })
+        },
+        queryUzu() {
+            console.log("enter queryUzu()")
+            axios.get("http://localhost:5000/query_uzu")
+                .then(response => {
+                    console.log(response.data.data)
+                    this.resultUzu = response.data.data;
+                })
+        },
+        playUzu(scid, uzid) {
+            var sid = document.getElementById("sid").textContent;
+            if (sid == "") {
+                window.alert("請先登入");
+                return;
+            }
+            axios.get("http://nt1.me:5000/play_uzu", {
+                params: {
+                    sid: sid,
+                    uzid: uzid,
+                    scid: scid,
+                }
+            })
+                .then(response => {
+                    console.log(response.data.status);
+                    if (response.data.status != 200) {
+                        window.alert("failed");
+                    } else {
+                        window.alert(response.data.message);
+                    }
+                }).catch(function (error) {
+                    window.alert(error);
+                });
         },
         prompt() {
             var sid = document.getElementById("sid").textContent;

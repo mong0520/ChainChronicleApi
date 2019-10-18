@@ -72,10 +72,45 @@
                     </table>
                     <a class="close-reveal-modal">&times;</a>
                 </div>
+
+                <div id="uzuModel" class="reveal-modal xlarge" data-reveal>
+                    <!-- table for uzu -->
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>編號</th>
+                                <th>名稱</th>
+                                <th>ScheduleID</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(result, index) in resultUzu">
+                                <td>{{ result.ID }}</td>
+                                <td>{{ result.Name }}</td>
+                                <td>{{ result.ScheduleID }}</td>
+                                <td><button id=uzuINfo type="button" @click="playUzu(result.ScheduleID, result.ID)" class="button tiny">Play!</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a class="close-reveal-modal">&times;</a>
+                </div>
+
+
                 <input type="text" id="queryText" value="挑戰者的" placeholder="查點東西">                
                 <button type="button" @click="queryQuest" class="button" data-reveal-id="questModel">查關卡</button>                
                 <button type="button" @click="queryChar" class="button" data-reveal-id="charModel">查卡牌</button>
                 <p></p>
+                
+                <label>
+                    一鍵系列
+                </label>
+                <button type="button" @click="queryUzu" class="button" data-reveal-id="uzuModel">深淵之禍</button>
+                <button type="button" disabled="disabled" @click="status" class="button">年代塔之記</button>
+
+                <label>
+                    快速抽卡
+                </label>
                 <button type="button" disabled="disabled" @click="status" class="button">抽張卡</button>
                 
             </div>

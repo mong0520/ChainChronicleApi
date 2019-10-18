@@ -42,6 +42,8 @@ func main() {
 	router.GET("/query_quest", handlers.QuestQueryHandler)
 	router.GET("/play_quest", handlers.QuestPlayHandler)
 	router.GET("/char", handlers.CharQueryHandler)
+	router.GET("/query_uzu", handlers.UzuQueryHandler)
+	router.GET("/play_uzu", handlers.UzuPlayHandler)
 
 	router.Run(":5000")
 }
