@@ -3,7 +3,7 @@
 new Vue({
     el: '#app',
     data: {
-        sid: '',
+        sid: 'N/A',
         msg: '',
         resultQuest: [],
         resultChar: [],
@@ -53,8 +53,12 @@ new Vue({
                 })
         },
         playQuest(qtype, qid) {
-            console.log("enter playQuest(), questID = " + qid);
-            var sid = document.getElementById("sid").textContent
+            var sid = document.getElementById("sid").textContent;
+            if (sid==""){
+                window.alert("請先登入");
+                return;
+            }
+            console.log("enter playQuest(), questID = " + qid);            
             axios.get("http://nt1.me:5000/play_quest", { params: {
                 sid: sid,
                 qtype: qtype,
@@ -62,11 +66,14 @@ new Vue({
                 pt: 0
             } })
                 .then(response => {
-                    console.log(response.data.message)
-                    window.alert(response.data.message);
+                    console.log(response.data.status);
+                    if (response.data.status != 200){
+                        window.alert("failed");
+                    }else{
+                        window.alert(response.data.message);
+                    }
                 }).catch(function (error) {
-                    window.alert(response.data.message);
-                    console.log(error);
+                    window.alert(error);
                 });
         },
         queryChar() {

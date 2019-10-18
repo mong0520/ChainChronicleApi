@@ -8,13 +8,15 @@
         <script src="https://cdn.staticfile.org/foundation/5.5.3/js/foundation.min.js"></script>
         <script src="https://cdn.staticfile.org/foundation/5.5.3/js/vendor/modernizr.js"></script>
     </head>
-    <body>        
-        <h1>鎖鏈戰記後台管理系統</h1>
+    <body>                
+        <div><img src=img/splash.jpg> </div>
+        <br>
         <div id="app" clas=content>
             <div class="large-10 medium-7 columns">
                 <input type="text" id="uid" value="iOS7069F115-D7DC-48F3-8658-04191F4AA949">
                 <button type="button" @click="login" class="button" data-reveal-id="myModal">登入</button>
                 <button type="button" @click="status" class="button" data-reveal-id="myModal">查狀態</button>                
+                <p>Logged in ID: {{sid}}</p>
                 <p id="sid" hidden>{{sid}}</p>
                 <div id="myModal" class="reveal-modal xlarge" data-reveal>
                     <pre><code>{{msg}}</code></pre>
@@ -70,12 +72,11 @@
                     </table>
                     <a class="close-reveal-modal">&times;</a>
                 </div>
-                <input type="text" id="queryText" value="南瓜" placeholder="查點東西">                
+                <input type="text" id="queryText" value="挑戰者的" placeholder="查點東西">                
                 <button type="button" @click="queryQuest" class="button" data-reveal-id="questModel">查關卡</button>                
                 <button type="button" @click="queryChar" class="button" data-reveal-id="charModel">查卡牌</button>
                 <p></p>
                 <button type="button" disabled="disabled" @click="status" class="button">抽張卡</button>
-                <button type="button" disabled="disabled" @click="status" class="button">玩關卡</button>
                 
             </div>
 
