@@ -89,7 +89,7 @@ new Vue({
         },
         queryUzu() {
             console.log("enter queryUzu()")
-            axios.get("http://localhost:5000/query_uzu")
+            axios.get("http://nt1.me:5000/query_uzu")
                 .then(response => {
                     console.log(response.data.data)
                     this.resultUzu = response.data.data;
