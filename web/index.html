@@ -96,6 +96,25 @@
                     <a class="close-reveal-modal">&times;</a>
                 </div>
 
+                <div id="gachaModel" class="reveal-modal xlarge" data-reveal>
+                    <!-- table for uzu -->
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>稀有度</th>
+                                <th>名稱</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(result, index) in resultGacha">
+                                <td>{{ result.Rarity }}</td>
+                                <td>{{ result.Title }} - {{ result.Name }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a class="close-reveal-modal">&times;</a>
+                </div>
+
 
                 <input type="text" id="queryText" value="挑戰者的" placeholder="查點東西">                
                 <button type="button" @click="queryQuest" class="button" data-reveal-id="questModel">查關卡</button>                
@@ -108,10 +127,31 @@
                 <button type="button" @click="queryUzu" class="button" data-reveal-id="uzuModel">深淵之禍</button>
                 <button type="button" disabled="disabled" @click="status" class="button">年代塔之記</button>
 
-                <label>
-                    快速抽卡
-                </label>
-                <button type="button" disabled="disabled" @click="status" class="button">抽張卡</button>
+                <hr>
+                <div class="row collapse prefix-radius">
+                    <div class="small-3 columns">
+                        <span class="prefix">卡池編號</span>
+                    </div>
+                    <div class="small-9 columns">
+                        <input id="gachaID" type="text" placeholder="1">
+                    </div>
+
+                    <div class="small-3 columns">
+                        <span class="prefix">抽卡次數</span>
+                    </div>
+                    <div class="small-9 columns">
+                        <input id="gachaCount" type="text" placeholder="1 or 10">
+                    </div>
+
+                    <!-- <div class="small-3 columns">
+                        <span class="prefix">批次次數</span>
+                    </div>
+                    <div class="small-9 columns">
+                        <input id="gachaBatch" type="text" placeholder="any number">
+                    </div> -->
+                </div>
+
+                <button type="button" @click="gacha" class="button" data-reveal-id="gachaModel">抽張卡</button>
                 
             </div>
 

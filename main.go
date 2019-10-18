@@ -44,6 +44,7 @@ func main() {
 	router.GET("/char", handlers.CharQueryHandler)
 	router.GET("/query_uzu", handlers.UzuQueryHandler)
 	router.GET("/play_uzu", handlers.UzuPlayHandler)
+	router.GET("/gacha", handlers.GachaHandler)
 
 	router.Run(":5000")
 }

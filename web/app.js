@@ -8,6 +8,7 @@ new Vue({
         resultQuest: [],
         resultChar: [],
         resultUzu: [],
+        resultGacha: [],
     },
     methods: {
         login() {
@@ -118,6 +119,41 @@ new Vue({
                 }).catch(function (error) {
                     window.alert(error);
                 });
+        },
+        gacha() {
+            var sid = document.getElementById("sid").textContent;
+            var gachaID = document.getElementById("gachaID").value;
+            var gachaCount = document.getElementById("gachaCount").value;
+            if (sid == "") {
+                window.alert("請先登入");
+                return;
+            }
+            console.log(sid, gachaID, gachaCount);
+            var tempResult = [];
+            // for (index = 0; index < gachaBatch; index++) {                
+            axios.get("http://localhost:5000/gacha", {
+                params: {
+                    sid: sid,
+                    gacha_id: gachaID,
+                    gacha_count: gachaCount,
+                }
+            })
+                .then(response => {
+                    console.log(response.data.status);
+                    if (response.data.status != 200) {
+                        window.alert("failed");
+                        console.log(response.data);
+                    } else {
+                        console.log(response.data.data[0].Name);
+                        // tempResult.push(response.data.data);
+                        this.resultGacha = response.data.data
+                    }
+                }).catch(function (error) {
+                    window.alert(error);
+                });
+                // console.log(tempResult);
+                // this.resultGacha = tempResult;
+            // }
         },
         prompt() {
             var sid = document.getElementById("sid").textContent;
