@@ -163,7 +163,7 @@ new Vue({
                 window.alert("請先登入");
                 return;
             }
-            axios.get("http://localhost:5000/events", {
+            axios.get("http://nt1.me:5000/events", {
                 params: {
                     sid: sid,
                 }
@@ -174,7 +174,7 @@ new Vue({
         },
         info() {
             axios.defaults.headers.common['origin'] = "mysite.com";
-            axios.get("http://localhost:5000/events?sid=f3fe67d003bb05789502f21e8c9dac0f", {
+            axios.get("http://nt1.me:5000/events?sid=f3fe67d003bb05789502f21e8c9dac0f", {
             })
                 .then(response => {
                     console.log(response.data.status);
