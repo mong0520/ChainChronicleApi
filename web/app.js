@@ -172,19 +172,6 @@ new Vue({
                 this.resultGachaInfo = response.data.data;
             })
         },
-        info() {
-            axios.defaults.headers.common['origin'] = "mysite.com";
-            axios.get("http://nt1.me:5000/events?sid=f3fe67d003bb05789502f21e8c9dac0f", {
-            })
-                .then(response => {
-                    console.log(response.data.status);
-                }).catch(function (error) {
-                    window.alert(error);
-                });
-            // console.log(tempResult);
-            // this.resultGacha = tempResult;
-            // }
-        },
         prompt() {
             var sid = document.getElementById("sid").textContent;
             this.msg = sid;
