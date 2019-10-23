@@ -12,6 +12,7 @@ import (
 func APIMiddleware(db *mgo.Session) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		logger := log.New()
+		logger.SetLevel(log.DebugLevel)
 		c.Set("databaseConn", db)
 		c.Set("logger", logger)
 		c.Next()
@@ -45,6 +46,7 @@ func main() {
 	router.GET("/query_uzu", handlers.UzuQueryHandler)
 	router.GET("/play_uzu", handlers.UzuPlayHandler)
 	router.GET("/gacha", handlers.GachaHandler)
+	router.GET("/events", handlers.EventsHandler)
 
 	router.Run(":5000")
 }

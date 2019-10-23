@@ -17,7 +17,6 @@
                 <input type="text" id="uid" value="iOS7069F115-D7DC-48F3-8658-04191F4AA949">
                 <button type="button" @click="login" class="button" data-reveal-id="myModal">登入</button>
                 <button type="button" @click="status" class="button" data-reveal-id="myModal">查狀態</button>
-                <button type="button" class="button" data-reveal-id="info">看公告</button>
                 <p>Logged in ID: {{sid}}</p>
                 <p id="sid" hidden>{{sid}}</p>
                 <div id="myModal" class="reveal-modal xlarge" data-reveal>
@@ -117,6 +116,31 @@
                     <a class="close-reveal-modal">&times;</a>
                 </div>
 
+                <div id="gachaInfoModel" class="reveal-modal xlarge" data-reveal>
+                    <!-- table for uzu -->
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Banner</th>
+                                <th>Info</th>                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(result, index) in resultGachaInfo">
+                                <td><img :src="result.banner_url"></td>
+                                <td>
+                                    <ul>
+                                        <li v-for="(item, index) in result.gacha_info">
+                                            Item: {{item.ItemName}}, ID: {{item.GachaID}}, Count: {{item.GachaCount}}
+                                        </li>
+                                    </ul>
+                                </td>                                
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a class="close-reveal-modal">&times;</a>
+                </div>
+
                 <div id="info" class="reveal-modal small" data-reveal>
                     <iframe src="http://v3810.cc.mobimon.com.tw/web/info" width="500" height="500" seamless></iframe>
                 </div>
@@ -157,6 +181,7 @@
                     </div> -->
                 </div>
 
+                <button type="button" @click="queryGachaInfo" class="button" data-reveal-id="gachaInfoModel">本期轉蛋資訊</button>
                 <button type="button" @click="gacha" class="button" data-reveal-id="gachaModel">抽張卡</button>
                 
                 
@@ -174,14 +199,6 @@
         $(document).ready(function () {
             $(document).foundation();
         })
-    </script>
-    <script type="text/javascript">
-        var cookieName = 'HelloWorld';
-        var cookieValue = 'HelloWorld';
-        var myDate = new Date();
-        myDate.setMonth(myDate.getMonth() + 12);
-        document.cookie = cookieName + "=" + cookieValue + ";expires=" + myDate
-            + ";domain=.example.com;path=/";
     </script>
     </body>
 </html>

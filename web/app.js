@@ -9,6 +9,7 @@ new Vue({
         resultChar: [],
         resultUzu: [],
         resultGacha: [],
+        resultGachaInfo: [],
     },
     methods: {
         login() {
@@ -153,6 +154,35 @@ new Vue({
                 });
                 // console.log(tempResult);
                 // this.resultGacha = tempResult;
+            // }
+        },
+        queryGachaInfo() {
+            console.log("enter queryGachaInfo()")
+            var sid = document.getElementById("sid").textContent;
+            if (sid == "") {
+                window.alert("請先登入");
+                return;
+            }
+            axios.get("http://localhost:5000/events", {
+                params: {
+                    sid: sid,
+                }
+            }).then(response => {
+                console.log(response.data.data)
+                this.resultGachaInfo = response.data.data;
+            })
+        },
+        info() {
+            axios.defaults.headers.common['origin'] = "mysite.com";
+            axios.get("http://localhost:5000/events?sid=f3fe67d003bb05789502f21e8c9dac0f", {
+            })
+                .then(response => {
+                    console.log(response.data.status);
+                }).catch(function (error) {
+                    window.alert(error);
+                });
+            // console.log(tempResult);
+            // this.resultGacha = tempResult;
             // }
         },
         prompt() {
