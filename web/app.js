@@ -9,11 +9,12 @@ new Vue({
         resultChar: [],
         resultUzu: [],
         resultGacha: [],
+        resultGachaInfo: [],
     },
     methods: {
         login() {
             {
-                var uid = document.getElementById("uid").value
+                var uid = document.getElementById("uid").value;
                 console.log("uid = " + uid);
                 axios
                     .get('http://nt1.me:5000/login', { params: { uid: uid } })
@@ -27,10 +28,25 @@ new Vue({
                     });
             }
         },
-        status() {
+        gachaInfo() {
+            {
+                var sid = document.getElementById("sid").textContent;
+                console.log("sid = " + sid);
+                axios
+                    .get('http://nt1.me:5000/events', { params: { sid: sid } })
+                    .then(response => {
+                        this.resultGachaInfo = response.data.data;
+                        console.log(response.data.data);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+        },
+        statuz() {
             {
                 this.msg = "查詢中...";
-                var sid = document.getElementById("sid").textContent
+                var sid = document.getElementById("sid").textContent;
                 console.log("sid = " + sid);
                 axios
                     .get('http://nt1.me:5000/status', { params: { sid: sid } })
