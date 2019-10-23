@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://cdn.staticfile.org/foundation/5.5.3/css/foundation.min.css">
+        <link rel="stylesheet" type="text/css" href="mystyle.css">
         <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
         <script src="https://cdn.staticfile.org/foundation/5.5.3/js/foundation.min.js"></script>
         <script src="https://cdn.staticfile.org/foundation/5.5.3/js/vendor/modernizr.js"></script>
@@ -15,7 +16,8 @@
             <div class="large-10 medium-7 columns">
                 <input type="text" id="uid" value="iOS7069F115-D7DC-48F3-8658-04191F4AA949">
                 <button type="button" @click="login" class="button" data-reveal-id="myModal">登入</button>
-                <button type="button" @click="status" class="button" data-reveal-id="myModal">查狀態</button>                
+                <button type="button" @click="status" class="button" data-reveal-id="myModal">查狀態</button>
+                <button type="button" class="button" data-reveal-id="info">看公告</button>
                 <p>Logged in ID: {{sid}}</p>
                 <p id="sid" hidden>{{sid}}</p>
                 <div id="myModal" class="reveal-modal xlarge" data-reveal>
@@ -115,6 +117,10 @@
                     <a class="close-reveal-modal">&times;</a>
                 </div>
 
+                <div id="info" class="reveal-modal small" data-reveal>
+                    <iframe src="http://v3810.cc.mobimon.com.tw/web/info" width="500" height="500" seamless></iframe>
+                </div>
+
 
                 <input type="text" id="queryText" value="挑戰者的" placeholder="查點東西">                
                 <button type="button" @click="queryQuest" class="button" data-reveal-id="questModel">查關卡</button>                
@@ -153,8 +159,8 @@
 
                 <button type="button" @click="gacha" class="button" data-reveal-id="gachaModel">抽張卡</button>
                 
-            </div>
-
+                
+            </div>   
         </div>
 
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
@@ -168,6 +174,14 @@
         $(document).ready(function () {
             $(document).foundation();
         })
+    </script>
+    <script type="text/javascript">
+        var cookieName = 'HelloWorld';
+        var cookieValue = 'HelloWorld';
+        var myDate = new Date();
+        myDate.setMonth(myDate.getMonth() + 12);
+        document.cookie = cookieName + "=" + cookieValue + ";expires=" + myDate
+            + ";domain=.example.com;path=/";
     </script>
     </body>
 </html>
