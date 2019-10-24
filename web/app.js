@@ -3,7 +3,7 @@
 new Vue({
     el: '#app',
     data: {
-        sid: 'N/A',
+        sid: '',
         msg: '',
         resultQuest: [],
         resultChar: [],
@@ -14,7 +14,7 @@ new Vue({
     methods: {
         login() {
             {
-                var uid = document.getElementById("uid").value
+                var uid = document.getElementById("uid").value;
                 console.log("uid = " + uid);
                 axios
                     .get('http://nt1.me:5000/login', { params: { uid: uid } })
@@ -28,10 +28,25 @@ new Vue({
                     });
             }
         },
-        status() {
+        gachaInfo() {
+            {
+                var sid = document.getElementById("sid").textContent;
+                console.log("sid = " + sid);
+                axios
+                    .get('http://nt1.me:5000/events', { params: { sid: sid } })
+                    .then(response => {
+                        this.resultGachaInfo = response.data.data;
+                        console.log(response.data.data);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+        },
+        statuz() {
             {
                 this.msg = "查詢中...";
-                var sid = document.getElementById("sid").textContent
+                var sid = document.getElementById("sid").textContent;
                 console.log("sid = " + sid);
                 axios
                     .get('http://nt1.me:5000/status', { params: { sid: sid } })
@@ -121,10 +136,11 @@ new Vue({
                     window.alert(error);
                 });
         },
-        gacha() {
+        gacha(gachaID, gachaCount) {
             var sid = document.getElementById("sid").textContent;
-            var gachaID = document.getElementById("gachaID").value;
-            var gachaCount = document.getElementById("gachaCount").value;
+            // var gachaID = document.getElementById("gachaID").value;
+            // var gachaCount = document.getElementById("gachaCount").value;
+            console.log(gachaID, gachaCount);
             if (sid == "") {
                 window.alert("請先登入");
                 return;
@@ -145,9 +161,15 @@ new Vue({
                         window.alert("failed");
                         console.log(response.data);
                     } else {
-                        console.log(response.data.data[0].Name);
+                        // console.log(response.data.data[0].Name);
                         // tempResult.push(response.data.data);
-                        this.resultGacha = response.data.data
+                        this.resultGacha = response.data.data;
+                        var result = "";
+                        for (idx = 0; idx < response.data.data.length ; idx ++){
+                            tmpResult = response.data.data[idx];
+                            result = result + tmpResult.Rarity + ": " + tmpResult.Title + tmpResult.Name + "\n";
+                        }
+                        window.alert(result);
                     }
                 }).catch(function (error) {
                     window.alert(error);
