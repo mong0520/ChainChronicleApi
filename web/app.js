@@ -1,9 +1,17 @@
 // ./app.js
 
+function getCook(cookiename) {
+    // Get name followed by anything except a semicolon
+    var cookiestring = RegExp("" + cookiename + "[^;]+").exec(document.cookie);
+    // Return everything after the equal sign, or an empty string if the cookie name not found
+    return decodeURIComponent(!!cookiestring ? cookiestring.toString().replace(/^[^=]+./, "") : "");
+}
+
+
 new Vue({
     el: '#app',
     data: {
-        sid: '',
+        sid: getCook("sid"),
         msg: '',
         resultQuest: [],
         resultChar: [],
@@ -21,6 +29,7 @@ new Vue({
                     .then(response => {
                         this.sid = response.data.data;
                         this.msg = "登入成功!";
+                        document.cookie = "sid="+this.sid;
                         console.log(this.sid)
                     })
                     .catch(function (error) {
