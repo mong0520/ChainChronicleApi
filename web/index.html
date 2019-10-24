@@ -131,8 +131,9 @@
                                 <td><img :src="result.banner_url"></td>
                                 <td>
                                     <template v-for="(item, index) in result.gacha_info">
-                                        <button id=questInfo type="button" @click="gacha(item.GachaID, item.GachaCount)" class="button tiny">用{{item.ItemName}}
-                                            轉 {{item.GachaCount}} 次</button>
+                                        <br>
+                                        <code>id: {{item.GachaID}}</code>
+                                        <button id=questInfo type="button" @click="gacha(item.GachaID, item.GachaCount)" class="button tiny">用{{item.ItemName}}轉{{item.GachaCount}}次</button>                            
                                     </template>                                    
                                 </td>                                
                             </tr>
