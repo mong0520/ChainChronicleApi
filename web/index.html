@@ -11,14 +11,14 @@
     <body>                
         <div><img src=img/splash.jpg> </div>
         <br>
-        <div id="app" clas=content>
+        <div id="app" class=content>
             <div class="large-10 medium-7 columns">
+                <p>Session ID: {{sid}}</p>
+                <p id="sid" hidden>{{sid}}</p>
                 <input type="text" id="uid" value="iOS7069F115-D7DC-48F3-8658-04191F4AA949">
                 <button type="button" @click="login" class="button">登入</button>
                 <button type="button" @click="statuz" class="button" data-reveal-id="myModal">查狀態</button>
-                <button type="button" class="button" data-reveal-id="info">看公告</button>
-                <p>Logged in ID: {{sid}}</p>
-                <p id="sid" hidden>{{sid}}</p>
+                <button type="button" class="button" data-reveal-id="info">看公告</button>                
                 <div id="myModal" class="reveal-modal xlarge" data-reveal>
                     <pre><code>{{msg}}</code></pre>
                     <a class="close-reveal-modal">&times;</a>
@@ -33,16 +33,16 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>類型</th>
-                                <th>編號</th>
+                                <!-- <th>類型</th> -->
+                                <!-- <th>編號</th> -->
                                 <th>名稱</th>
                                 <th>動作</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="(result, index) in resultQuest">
-                                <td>{{ result.QuestType }}</td>
-                                <td>{{ result.QuestID }}</td>
+                                <!-- <td>{{ result.QuestType }}</td> -->
+                                <!-- <td>{{ result.QuestID }}</td> -->
                                 <td>{{ result.Name }}</td>
                                 <td><button id=questInfo type="button" @click="playQuest(result.QuestType, result.QuestID)" class="button tiny" >Play!</button></td>
                             </tr>
@@ -97,7 +97,7 @@
                     <a class="close-reveal-modal">&times;</a>
                 </div>
 
-                <div id="gachaModel" class="reveal-modal xlarge" data-reveal>
+                <div id="gachaModel" class="reveal-modal xlarge" data-reveal data-options="multiple_opened:true;">
                     <!-- table for uzu -->
                     <table>
                         <thead>
@@ -118,11 +118,11 @@
 
 
 				<div id="gachaInfoModel" class="reveal-modal xlarge" data-reveal>
-                    <!-- table for uzu -->
+                    <!-- table for gachaInfo -->
                     <table>
                         <thead>
                             <tr>
-                                <th>Banner</th>
+                                <th>封面</th>
                                 <th>Info</th>                                
                             </tr>
                         </thead>
@@ -130,11 +130,10 @@
                             <tr v-for="(result, index) in resultGachaInfo">
                                 <td><img :src="result.banner_url"></td>
                                 <td>
-                                    <ul>
-                                        <li v-for="(item, index) in result.gacha_info">
-                                            Item: {{item.ItemName}}, ID: {{item.GachaID}}, Count: {{item.GachaCount}}
-                                        </li>
-                                    </ul>
+                                    <template v-for="(item, index) in result.gacha_info">
+                                        <button id=questInfo type="button" @click="gacha(item.GachaID, item.GachaCount)" class="button tiny">用{{item.ItemName}}
+                                            轉 {{item.GachaCount}} 次</button>
+                                    </template>                                    
                                 </td>                                
                             </tr>
                         </tbody>
@@ -151,14 +150,17 @@
                 <button type="button" @click="queryQuest" class="button" data-reveal-id="questModel">查關卡</button>                
                 <button type="button" @click="queryChar" class="button" data-reveal-id="charModel">查卡牌</button>
                 <p></p>
+
+                <hr>
                 
                 <label>
                     一鍵系列
                 </label>
                 <button type="button" @click="queryUzu" class="button" data-reveal-id="uzuModel">深淵之禍</button>
+                <button type="button" disabled="disabled" @click="queryUzu" class="button" data-reveal-id="uzuModel">深淵之禍</button>
 
                 <hr>
-                <div class="row collapse prefix-radius">
+                <!-- <div class="row collapse prefix-radius">
                     <div class="small-3 columns">
                         <span class="prefix">卡池編號</span>
                     </div>
@@ -172,16 +174,9 @@
                     <div class="small-9 columns">
                         <input id="gachaCount" type="text" placeholder="1 or 10">
                     </div>
+                </div> -->
 
-                    <!-- <div class="small-3 columns">
-                        <span class="prefix">批次次數</span>
-                    </div>
-                    <div class="small-9 columns">
-                        <input id="gachaBatch" type="text" placeholder="any number">
-                    </div> -->
-                </div>
-
-                <button type="button" @click="gacha" class="button" data-reveal-id="gachaModel">抽張卡</button>
+                <!-- <button type="button" @click="gacha" class="button" data-reveal-id="gachaModel">抽張卡</button> -->
                 <button type="button" @click="gachaInfo" class="button" data-reveal-id="gachaInfoModel">本期轉蛋</button>
                 
                 
