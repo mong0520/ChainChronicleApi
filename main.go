@@ -30,14 +30,14 @@ func main() {
 	// }))
 	router.Use(cors.Default())
 	conn := &mgo.Session{}
-	conn, err := mgo.Dial("localhost:27017")
+	conn, err := mgo.Dial("mongodb:27017")
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	router.Use(APIMiddleware(conn))
 
-    // router.Static("/web", "./web")
+	// router.Static("/web", "./web")
 	router.GET("/login", handlers.LoginHandler)
 	router.GET("/status", handlers.StatusHandler)
 	router.GET("/query_quest", handlers.QuestQueryHandler)
