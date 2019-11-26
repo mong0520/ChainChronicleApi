@@ -37,7 +37,7 @@ func EventsHandler(c *gin.Context) {
 					// logger.Debug("--------------------------")
 					// logger.Debug("gacha type = ", banner.GachaType)
 					// logger.Debug("gacha id = ", banner.GachaID)
-					banner.BannerURL = fmt.Sprintf("http://content.cc.mobimon.com.tw/3810/Prod/Resource/Banner/%s", banner.Name)
+					banner.BannerURL = fmt.Sprintf("http://content.cc.mobimon.com.tw/3810/Prod-Prod/Resource/Banner/%s", banner.Name)
 					banner.InfoURL = fmt.Sprintf("http://v3810.cc.mobimon.com.tw/web/gacha?type=%s&gacha_id=%d", banner.GachaType, banner.GachaID)
 
 					gachasInfo, err := web.GetGachaInfo(banner.GachaType, sid, banner.GachaID)
