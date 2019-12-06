@@ -52,6 +52,18 @@ func EventsHandler(c *gin.Context) {
 			}
 		}
 	}
+
+	// FIXME: very hard code to show Majin Gacha info
+	gachasInfo, err := web.GetGachaInfo("raidex", sid, 0)
+	if err != nil {
+		logger.Error(err)
+	}
+
+	tmpBanner := models.Banner{}
+	tmpBanner.GachaInfo = gachasInfo
+
+	results = append(results, tmpBanner)
+
 	res.Data = results
 
 	c.JSON(200, res)
