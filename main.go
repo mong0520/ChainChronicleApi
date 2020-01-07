@@ -1,6 +1,11 @@
 package main
 
 import (
+	"crypto/tls"
+	"fmt"
+	"net"
+	"os"
+
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/mong0520/ChainChronicleApi/handlers"
@@ -29,13 +34,36 @@ func main() {
 	// 	MaxAge:           12 * time.Hour,
 	// }))
 	router.Use(cors.Default())
-	conn := &mgo.Session{}
-	conn, err := mgo.Dial("mongodb:27017")
-	if err != nil {
-		log.Fatal(err)
-	}
+	dbMode := os.Getenv("DBMode")
 
-	router.Use(APIMiddleware(conn))
+	if dbMode == "docker" {
+		conn, err := mgo.Dial("mongodb:27017")
+		if err != nil {
+			log.Fatal(err)
+		}
+		router.Use(APIMiddleware(conn))
+	} else if dbMode == "local" {
+		conn, err := mgo.Dial("localhost:27017")
+		if err != nil {
+			log.Fatal(err)
+		}
+		router.Use(APIMiddleware(conn))
+	} else if dbMode == "remote" {
+		dbURI := os.Getenv("DBUri")
+		dialInfo, _ := mgo.ParseURL(dbURI)
+		tlsConfig := &tls.Config{}
+		dialInfo.DialServer = func(addr *mgo.ServerAddr) (net.Conn, error) {
+			conn, err := tls.Dial("tcp", addr.String(), tlsConfig)
+			return conn, err
+		}
+		if conn, err := mgo.DialWithInfo(dialInfo); err != nil {
+			log.Errorf("Unable to connect DB %s, Dialnfo = %+v", err, dialInfo)
+		} else {
+			router.Use(APIMiddleware(conn))
+		}
+	} else {
+		log.Fatalf("unsupported DBMode: %s", dbMode)
+	}
 
 	// router.Static("/web", "./web")
 	router.GET("/login", handlers.LoginHandler)
@@ -48,5 +76,7 @@ func main() {
 	router.GET("/gacha", handlers.GachaHandler)
 	router.GET("/events", handlers.EventsHandler)
 
-	router.Run(":5000")
+	port := os.Getenv("PORT")
+	addr := fmt.Sprintf(":%s", port)
+	router.Run(addr)
 }
